@@ -1,0 +1,39 @@
+package DAO;
+
+public class Account {
+    char[] username = new char[32];
+    char[] password = new char[32];
+    boolean isAdmin = false;
+
+    public Account() { }
+
+    public Account(char[] username, char[] password, boolean isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
+
+    public char[] getUsername() {
+        return username;
+    }
+
+    public void setUsername(char[] username) {
+        this.username = username;
+    }
+
+    public char[] getPassword() {
+        return password;
+    }
+
+    public void setPassword(char[] password) {
+        this.password = password;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
+    }
+}
