@@ -3,6 +3,7 @@ package com.ensa.glminiprojectsp.DAO;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name="ModuleElement")
 public class ModuleElement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
