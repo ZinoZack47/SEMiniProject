@@ -1,11 +1,20 @@
 package com.ensa.glminiprojectsp.DAO;
 
+import jakarta.persistence.*;
+
+@Entity
 public class ModuleElement {
-    int code;
-    Module module;
-    float coefficient;
-    Professor professor;
-    boolean validated;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int code;
+    @ManyToOne
+    private Module module;
+    @Column(name="coefficient")
+    private float coefficient;
+    @ManyToOne
+    private Professor professor;
+    @Column(name="validated")
+    private boolean validated;
 
     public ModuleElement() { }
 

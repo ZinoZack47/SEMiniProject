@@ -1,9 +1,21 @@
 package com.ensa.glminiprojectsp.DAO;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Account")
 public class Account {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     int code;
+
+    @Column(name = "username")
     char[] username = new char[32];
+
+    @Column(name = "password")
     char[] password = new char[32];
+
+    @Column(name = "is_admin")
     boolean isAdmin = false;
 
     public Account() { }
