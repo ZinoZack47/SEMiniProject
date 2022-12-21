@@ -3,12 +3,12 @@ package com.ensa.glminiprojectsp.DAO;
 import java.util.ArrayList;
 
 public class Professor {
-
     int code;
     String firstName;
     String lastName;
     String specialty;
     ArrayList<ModuleElement> moduleElements = new ArrayList<>();
+    Account account;
 
     public Professor() { }
     public Professor(int code, String firstName, String lastName, String specialty) {
@@ -60,5 +60,13 @@ public class Professor {
 
     public void resetModuleElements() {
         this.moduleElements.clear();
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

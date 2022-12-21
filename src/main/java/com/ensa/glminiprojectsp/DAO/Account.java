@@ -1,6 +1,7 @@
 package com.ensa.glminiprojectsp.DAO;
 
 public class Account {
+    int code;
     char[] username = new char[32];
     char[] password = new char[32];
     boolean isAdmin = false;
@@ -11,6 +12,14 @@ public class Account {
         this.username = username;
         this.password = password;
         this.isAdmin = isAdmin;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public char[] getUsername() {
