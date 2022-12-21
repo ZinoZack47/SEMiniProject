@@ -1,6 +1,6 @@
 package com.ensa.glminiprojectsp.DAO;
 
-public enum EvaluationMethod {
+public enum AssessmentMethods {
     CC,
     PW, // practical work - TP
     PP;

@@ -50,15 +50,15 @@ public class Professor {
         this.specialty = specialty;
     }
 
-    public void addSector(Major major) {
+    public void addMajor(Major major) {
         this.majors.add(major);
     }
 
-    public void removeSector(Major major) {
+    public void removeMajor(Major major) {
         this.majors.remove(major);
     }
 
-    public void resetSectors() {
+    public void resetMajors() {
         this.majors.clear();
     }
 
