@@ -3,11 +3,11 @@ package com.ensa.glminiprojectsp.DAO;
 import java.util.ArrayList;
 
 public class Professor {
+
     int code;
     String firstName;
     String lastName;
     String specialty;
-    ArrayList<Major> majors = new ArrayList<>();
     ArrayList<ModuleElement> moduleElements = new ArrayList<>();
 
     public Professor() { }
@@ -48,18 +48,6 @@ public class Professor {
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
-    }
-
-    public void addMajor(Major major) {
-        this.majors.add(major);
-    }
-
-    public void removeMajor(Major major) {
-        this.majors.remove(major);
-    }
-
-    public void resetMajors() {
-        this.majors.clear();
     }
 
     public void addModuleElement(ModuleElement moduleElement) {
