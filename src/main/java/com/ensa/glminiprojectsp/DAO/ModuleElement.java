@@ -5,6 +5,7 @@ public class ModuleElement {
     Module module;
     float coefficient;
     Professor professor;
+    boolean validated;
 
     public ModuleElement() { }
 
@@ -44,5 +45,13 @@ public class ModuleElement {
 
     public void setProfessor(Professor professor) {
         this.professor = professor;
+    }
+
+    public boolean isValidated() {
+        return validated;
+    }
+
+    public void setValidated(boolean validated) {
+        this.validated = validated;
     }
 }

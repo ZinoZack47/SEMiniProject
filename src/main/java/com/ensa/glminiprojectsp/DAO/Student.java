@@ -8,10 +8,10 @@ public class Student {
     String lastName;
     Major major;
     ArrayList<Score> scores;
+
     public Student() { }
 
-    public Student(int code, String firstName, String lastName, Major major) {
-        this.code = code;
+    public Student(String firstName, String lastName, Major major) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.major = major;
