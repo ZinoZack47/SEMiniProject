@@ -1,6 +1,7 @@
 package com.ensa.glminiprojectsp.DAO;
 
 public class ModuleElement {
+    int code;
     Module module;
     float coefficient;
     Professor professor;
@@ -11,6 +12,14 @@ public class ModuleElement {
         this.module = module;
         this.coefficient = coefficient;
         this.professor = professor;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public Module getModule() {
