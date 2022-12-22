@@ -1,21 +1,14 @@
 package com.ensa.glminiprojectsp.DAO;
 
-import jakarta.persistence.*;
+import java.util.ArrayList;
 
-@Entity
-@Table(name="ModuleElement")
 public class ModuleElement {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int code;
-    @ManyToOne
-    private Module module;
-    @Column(name="coefficient")
-    private float coefficient;
-    @ManyToOne
-    private Professor professor;
-    @Column(name="validated")
-    private boolean validated;
+    int code;
+    Module module;
+    float coefficient;
+    Professor professor;
+    AssessmentMethod[] assessmentMethods = new AssessmentMethod[AssessmentMethod.values().length];
+    boolean validated;
 
     public ModuleElement() { }
 

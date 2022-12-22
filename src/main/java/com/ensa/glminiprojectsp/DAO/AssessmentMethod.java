@@ -5,12 +5,12 @@ public enum AssessmentMethod {
     PW, // practical work - TP
     PP;
 
+    float percentage;
     public float getPercentage() {
-        return switch (this) {
-            case CC -> 0.3f;
-            case PW -> 0.2f;
-            case PP -> 0.5f;
-        };
+        return percentage;
+    }
+    public void setPercentage(float percentage) {
+        this.percentage = percentage;
     }
 }
 //

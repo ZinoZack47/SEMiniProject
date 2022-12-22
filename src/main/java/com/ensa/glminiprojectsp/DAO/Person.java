@@ -1,24 +1,24 @@
 package com.ensa.glminiprojectsp.DAO;
 
 public abstract class Person {
-    protected int code;
+    protected String id;
     protected String firstName;
     protected String lastName;
 
     public Person() {}
 
-    public Person(int code, String firstName, String lastName) {
-        this.code = code;
+    public Person(String id, String firstName, String lastName) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
-    public int getCode() {
-        return code;
+    public String getId() {
+        return id;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {

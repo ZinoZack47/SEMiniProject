@@ -1,20 +1,9 @@
 package com.ensa.glminiprojectsp.DAO;
 
-import jakarta.persistence.*;
-
-import java.util.ArrayList;
-
-
-@Entity
 public class Module {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int code;
-    @Column(name="name")
     String name;
-    @Column(name="semester")
     Semester semester;
-    @ManyToOne
     Major major;
 
     public Module() { }

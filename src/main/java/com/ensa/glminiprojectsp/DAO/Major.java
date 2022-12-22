@@ -1,19 +1,10 @@
 package com.ensa.glminiprojectsp.DAO;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 
-@Entity
-@Table(name = "Major")
 public class Major {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     int code;
-    @Column(name = "name")
     String name;
-
-    @OneToMany(mappedBy="major")
     ArrayList<Module> modules;
 
     public Major() { }
@@ -51,4 +42,3 @@ public class Major {
         this.modules.clear();
     }
 }
-

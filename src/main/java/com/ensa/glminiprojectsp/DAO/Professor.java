@@ -1,61 +1,17 @@
 package com.ensa.glminiprojectsp.DAO;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 
-@Entity
-@Table(name = "Professor")
-public class Professor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int code;
-
-    @Column(name="first_name")
-    String firstName;
-
-    @Column(name="last_name")
-    String lastName;
-
-    @Column(name="specialty")
+public class Professor extends Person {
     String specialty;
-
-    @OneToMany(mappedBy = "professor")
     ArrayList<ModuleElement> moduleElements = new ArrayList<>();
-
-    @OneToOne(mappedBy = "professor")
     Account account;
 
     public Professor() { }
-    public Professor(int code, String firstName, String lastName, String specialty) {
-        this.code = code;
-        this.firstName = firstName;
-        this.lastName = lastName;
+
+    public Professor(String id, String firstName, String lastName, String specialty) {
+        super(id, firstName, lastName);
         this.specialty = specialty;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getSpecialty() {
