@@ -8,8 +8,12 @@ public class Student extends Person {
 
     public Student() { }
 
-    public Student(String id, String firstName, String lastName, Major major) {
+    public Student(String id, String firstName, String lastName)  {
         super(id, firstName, lastName);
+    }
+
+    public Student(String id, String firstName, String lastName, Major major) {
+        this(id, firstName, lastName);
         this.major = major;
     }
 
@@ -19,5 +23,17 @@ public class Student extends Person {
 
     public void setMajor(Major major) {
         this.major = major;
+    }
+
+    public void addScore(Score score) {
+        this.scores.add(score);
+    }
+
+    public void removeScore(Score score) {
+        this.scores.remove(score);
+    }
+
+    public void resetScores() {
+        scores.clear();
     }
 }

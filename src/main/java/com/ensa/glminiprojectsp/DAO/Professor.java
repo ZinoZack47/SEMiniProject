@@ -8,9 +8,11 @@ public class Professor extends Person {
     Account account;
 
     public Professor() { }
-
-    public Professor(String id, String firstName, String lastName, String specialty) {
+    public Professor(String id, String firstName, String lastName)  {
         super(id, firstName, lastName);
+    }
+    public Professor(String id, String firstName, String lastName, String specialty) {
+        this(id, firstName, lastName);
         this.specialty = specialty;
     }
 

@@ -1,18 +1,19 @@
 package com.ensa.glminiprojectsp.DAO;
 
+import java.util.ArrayList;
+
 public class Module {
     int code;
     String name;
     Semester semester;
-    Major major;
+    ArrayList<Major> majors;
 
     public Module() { }
 
-    public Module(int code, String name, Semester semester, Major major) {
+    public Module(int code, String name, Semester semester) {
         this.code = code;
         this.name = name;
         this.semester = semester;
-        this.major = major;
     }
 
     public int getCode() {
@@ -39,11 +40,16 @@ public class Module {
         this.semester = semester;
     }
 
-    public Major getMajor() {
-        return major;
+    public void addMajor(Major major) {
+        this.majors.add(major);
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
+    public void removeMajor(Major major) {
+        this.majors.remove(major);
     }
+
+    public void resetMajors() {
+        this.majors.clear();
+    }
+
 }
