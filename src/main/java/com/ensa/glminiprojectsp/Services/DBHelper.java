@@ -1,6 +1,6 @@
 package com.ensa.glminiprojectsp.Services;
 
-import com.ensa.glminiprojectsp.DAO.*;
+import com.ensa.glminiprojectsp.Beans.*;
 
 import java.util.ArrayList;
 

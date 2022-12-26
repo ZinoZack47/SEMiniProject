@@ -1,6 +1,6 @@
 package com.ensa.glminiprojectsp;
 
-import com.ensa.glminiprojectsp.DAO.*;
+import com.ensa.glminiprojectsp.Beans.*;
 import com.ensa.glminiprojectsp.Observers.ProfessorObserver;
 import com.ensa.glminiprojectsp.Services.MySQLConnector;
 import org.junit.jupiter.api.Test;
@@ -52,13 +52,13 @@ class GlMiniProjectSpApplicationTests {
         ProfessorObserver po = new ProfessorObserver(MySQLConnector.getInstance(), professor);
         professor.attach(po);
         professor.setLastName("Watson");
-        professor = (Professor)MySQLConnector.getInstance(env).findById(id);
+        professor = (Professor)MySQLConnector.getInstance().findById(id);
         assertThat(professor.getLastName()).isEqualTo("Watson");
         System.out.println(professor);
         po.setObserved(professor);
         professor.attach(po);
         professor.setLastName("Williams");
-        professor = (Professor)MySQLConnector.getInstance(env).findById(id);
+        professor = (Professor)MySQLConnector.getInstance().findById(id);
         assertThat(professor.getLastName()).isEqualTo("Williams");
         System.out.println(professor);
     }

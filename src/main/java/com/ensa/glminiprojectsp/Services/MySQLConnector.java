@@ -1,9 +1,9 @@
 package com.ensa.glminiprojectsp.Services;
 
-import com.ensa.glminiprojectsp.DAO.Major;
-import com.ensa.glminiprojectsp.DAO.Person;
-import com.ensa.glminiprojectsp.DAO.Professor;
-import com.ensa.glminiprojectsp.DAO.Student;
+import com.ensa.glminiprojectsp.Beans.Major;
+import com.ensa.glminiprojectsp.Beans.Person;
+import com.ensa.glminiprojectsp.Beans.Professor;
+import com.ensa.glminiprojectsp.Beans.Student;
 import com.ensa.glminiprojectsp.Factory.Factory;
 import org.springframework.core.env.Environment;
 
@@ -72,10 +72,10 @@ public class MySQLConnector implements DBHelper {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
             while (resultSet.next()) {
-                String id  = String.valueOf(resultSet.getInt("id"));
+                String id  = resultSet.getString("id");
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
-                Major major = findMajorById(resultSet.getInt("major"));
+                Major major = findMajorById(resultSet.getInt("major_code"));
                 var student = Factory.makeStudent(id, firstName, lastName, major);
                 students.add(student);
             }

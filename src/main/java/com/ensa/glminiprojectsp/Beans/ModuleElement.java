@@ -1,6 +1,4 @@
-package com.ensa.glminiprojectsp.DAO;
-
-import java.util.ArrayList;
+package com.ensa.glminiprojectsp.Beans;
 
 public class ModuleElement {
     int code;

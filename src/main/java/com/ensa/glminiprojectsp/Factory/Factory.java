@@ -1,9 +1,9 @@
 package com.ensa.glminiprojectsp.Factory;
 
-import com.ensa.glminiprojectsp.DAO.Major;
-import com.ensa.glminiprojectsp.DAO.Person;
-import com.ensa.glminiprojectsp.DAO.Professor;
-import com.ensa.glminiprojectsp.DAO.Student;
+import com.ensa.glminiprojectsp.Beans.Major;
+import com.ensa.glminiprojectsp.Beans.Person;
+import com.ensa.glminiprojectsp.Beans.Professor;
+import com.ensa.glminiprojectsp.Beans.Student;
 
 public class Factory {
     private Factory() {};

@@ -1,6 +1,6 @@
 package com.ensa.glminiprojectsp.Observers;
 
-import com.ensa.glminiprojectsp.DAO.Professor;
+import com.ensa.glminiprojectsp.Beans.Professor;
 import com.ensa.glminiprojectsp.Services.DBHelper;
 
 public class ProfessorObserver implements Observer {

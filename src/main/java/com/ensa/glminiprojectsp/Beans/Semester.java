@@ -1,4 +1,4 @@
-package com.ensa.glminiprojectsp.DAO;
+package com.ensa.glminiprojectsp.Beans;
 
 enum Semester {
     S1,

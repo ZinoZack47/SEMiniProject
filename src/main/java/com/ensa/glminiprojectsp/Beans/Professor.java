@@ -1,4 +1,4 @@
-package com.ensa.glminiprojectsp.DAO;
+package com.ensa.glminiprojectsp.Beans;
 
 import com.ensa.glminiprojectsp.Observers.Observer;
 
