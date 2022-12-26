@@ -1,11 +1,12 @@
 package com.ensa.glminiprojectsp.DAO;
 
+import com.ensa.glminiprojectsp.Observers.Observer;
+
 import java.util.ArrayList;
 
 public class Professor extends Person {
     String specialty;
     ArrayList<ModuleElement> moduleElements = new ArrayList<>();
-    Account account;
 
     public Professor() { }
     public Professor(String id, String firstName, String lastName)  {
@@ -16,12 +17,32 @@ public class Professor extends Person {
         this.specialty = specialty;
     }
 
+    @Override
+    public void setId(String id) {
+        String oldId = super.getId();
+        super.setId(id);
+        notifyObservers(oldId);
+    }
+
+    @Override
+    public void setFirstName(String firstName) {
+        super.setFirstName(firstName);
+        notifyObservers(id);
+    }
+
+    @Override
+    public void setLastName(String lastName) {
+        super.setLastName(lastName);
+        notifyObservers(id);
+    }
+
     public String getSpecialty() {
         return specialty;
     }
 
     public void setSpecialty(String specialty) {
         this.specialty = specialty;
+        this.notifyObservers(id);
     }
 
     public void addModuleElement(ModuleElement moduleElement) {
@@ -36,11 +57,18 @@ public class Professor extends Person {
         this.moduleElements.clear();
     }
 
-    public Account getAccount() {
-        return account;
+    //Observers
+    ArrayList<Observer> observers = new ArrayList<>();
+    public void attach(Observer observer) {
+        observers.add(observer);
     }
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+    public void notifyObservers(String id) {
+        for (Observer observer : observers) {
+            observer.update(id);
+        }
     }
 }

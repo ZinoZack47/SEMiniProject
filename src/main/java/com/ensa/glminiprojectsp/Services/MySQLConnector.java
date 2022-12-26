@@ -57,6 +57,7 @@ public class MySQLConnector implements DBHelper {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Major WHERE code = ?");
             statement.setInt(1, code);
             ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
             String name = resultSet.getString("name");
             return new Major(code, name);
         } catch (SQLException e) {
@@ -110,13 +111,17 @@ public class MySQLConnector implements DBHelper {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM Professor WHERE id = ?");
             statement.setString(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (resultSet.isBeforeFirst()) {
+            if (!resultSet.next()) {
                 statement = connection.prepareStatement("SELECT * FROM Student WHERE id = ?");
                 statement.setString(1, id);
                 resultSet = statement.executeQuery();
+
+                if (!resultSet.next())
+                    return null;
+
                 String firstName = resultSet.getString("first_name");
                 String lastName = resultSet.getString("last_name");
-                Major major = findMajorById(resultSet.getInt("major"));
+                Major major = findMajorById(resultSet.getInt("major_code"));
                 return Factory.makeStudent(id, firstName, lastName, major);
             }
             String firstName = resultSet.getString("first_name");
@@ -127,5 +132,26 @@ public class MySQLConnector implements DBHelper {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void updateProfessor(String id, Professor professor) {
+        try {
+            String query = "UPDATE Professor " +
+                    "SET id = ?," +
+                    "first_name = ?," +
+                    "last_name = ?," +
+                    "specialty = ? " +
+                    "WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, professor.getId());
+            statement.setString(2, professor.getFirstName());
+            statement.setString(3, professor.getLastName());
+            statement.setString(4, professor.getSpecialty());
+            statement.setString(5, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
