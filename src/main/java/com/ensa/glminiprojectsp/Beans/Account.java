@@ -3,14 +3,19 @@ package com.ensa.glminiprojectsp.Beans;
 public class Account {
     int code;
     char[] username = new char[32];
-    char[] password = new char[32];
+    byte[] hashedPassword = new byte[255];
     boolean isAdmin = false;
 
     public Account() { }
 
-    public Account(char[] username, char[] password, boolean isAdmin) {
+    public Account(char[] username, byte[] hashedPassword, boolean isAdmin) {
+        this(0, username, hashedPassword, isAdmin);
+    }
+
+    public Account(int code, char[] username, byte[] hashedPassword, boolean isAdmin) {
+        this.code = code;
         this.username = username;
-        this.password = password;
+        this.hashedPassword = hashedPassword;
         this.isAdmin = isAdmin;
     }
 
@@ -30,12 +35,12 @@ public class Account {
         this.username = username;
     }
 
-    public char[] getPassword() {
-        return password;
+    public byte[] getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(char[] password) {
-        this.password = password;
+    public void setHashedPassword(byte[] hashedPassword) {
+        this.hashedPassword = hashedPassword;
     }
 
     public boolean isAdmin() {

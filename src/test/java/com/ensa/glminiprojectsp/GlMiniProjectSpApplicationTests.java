@@ -3,12 +3,14 @@ package com.ensa.glminiprojectsp;
 import com.ensa.glminiprojectsp.Beans.*;
 import com.ensa.glminiprojectsp.Observers.ProfessorObserver;
 import com.ensa.glminiprojectsp.Services.MySQLConnector;
+import com.ensa.glminiprojectsp.Utils.PasswordHash;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,5 +65,43 @@ class GlMiniProjectSpApplicationTests {
         System.out.println(professor);
     }
 
+    @Test
+    void testPasswordHacher() {
+        final char[] password = "123456789".toCharArray();
+        final char[] passNo = "123458683".toCharArray();
+        byte[] salt = PasswordHash.getInstance().generateSalt();
+        byte[] hashedPassWithSalt = PasswordHash.getInstance().hashPassword(password, salt);
+        System.out.println("Hashed Pass: " + Arrays.toString(hashedPassWithSalt));
+        assertThat(hashedPassWithSalt.length).isLessThan(255);
+        assertThat(PasswordHash.getInstance().verifyPassword(password, hashedPassWithSalt)).isEqualTo(true);
+        assertThat(PasswordHash.getInstance().verifyPassword(passNo, hashedPassWithSalt)).isEqualTo(false);
+    }
 
+    @Test
+    void testAddAccount() {
+        final char[] username = "W213231".toCharArray();
+        final char[] password = "1233232".toCharArray();
+        final byte[] salt = PasswordHash.getInstance().generateSalt();
+        final byte[] hashedPassword = PasswordHash.getInstance().hashPassword(password, salt);
+        Account account = new Account(username, hashedPassword, true);
+        MySQLConnector.getInstance(env).addAccount(account);
+    }
+
+    @Test
+    void testVerifyPasswordFromDatabase() {
+        String username = "W213231";
+        final char[] password = "1233232".toCharArray();
+        Account account = MySQLConnector.getInstance(env).findAccountByUserId(username);
+        byte[] hashedPassword = account.getHashedPassword();
+        assertThat(PasswordHash.getInstance().verifyPassword(password, hashedPassword)).isEqualTo(true);
+    }
+
+    @Test
+    void testVerifyPasswordFromDatabaseFalse() {
+        String username = "W213231";
+        final char[] password = "1233272".toCharArray();
+        Account account = MySQLConnector.getInstance(env).findAccountByUserId(username);
+        byte[] hashedPassword = account.getHashedPassword();
+        assertThat(PasswordHash.getInstance().verifyPassword(password, hashedPassword)).isEqualTo(false);
+    }
 }

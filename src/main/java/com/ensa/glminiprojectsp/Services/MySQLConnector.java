@@ -1,9 +1,6 @@
 package com.ensa.glminiprojectsp.Services;
 
-import com.ensa.glminiprojectsp.Beans.Major;
-import com.ensa.glminiprojectsp.Beans.Person;
-import com.ensa.glminiprojectsp.Beans.Professor;
-import com.ensa.glminiprojectsp.Beans.Student;
+import com.ensa.glminiprojectsp.Beans.*;
 import com.ensa.glminiprojectsp.Factory.Factory;
 import org.springframework.core.env.Environment;
 
@@ -65,6 +62,25 @@ public class MySQLConnector implements DBHelper {
         }
         return null;
     }
+
+    @Override
+    public Account findAccountByUserId(String userId) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM Account WHERE username = ?");
+            statement.setString(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            int code = resultSet.getInt("code");
+            char[] username = resultSet.getString("username").toCharArray();
+            byte[] hashedPassword = resultSet.getBytes("hashed_password");
+            boolean isAdmin = resultSet.getBoolean("is_admin");
+            return new Account(code, username, hashedPassword, isAdmin);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     @Override
     public ArrayList<Student> getAllStudents() {
         ArrayList<Student> students = new ArrayList<>();
@@ -72,11 +88,11 @@ public class MySQLConnector implements DBHelper {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Student");
             while (resultSet.next()) {
-                String id  = resultSet.getString("id");
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                Major major = findMajorById(resultSet.getInt("major_code"));
-                var student = Factory.makeStudent(id, firstName, lastName, major);
+                var student = (Student)Factory.makePerson("s");
+                student.setId(resultSet.getString("id"));
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setMajor(findMajorById(resultSet.getInt("major_code")));
                 students.add(student);
             }
         } catch (SQLException e) {
@@ -92,11 +108,11 @@ public class MySQLConnector implements DBHelper {
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM Professor");
             while (resultSet.next()) {
-                String id  = String.valueOf(resultSet.getString("id"));
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                String specialty = resultSet.getString("specialty");
-                var professor = Factory.makeProfessor(id, firstName, lastName, specialty);
+                var professor = (Professor)Factory.makePerson("p");
+                professor.setId(resultSet.getString("id"));
+                professor.setFirstName(resultSet.getString("first_name"));
+                professor.setLastName(resultSet.getString("last_name"));
+                professor.setSpecialty(resultSet.getString("specialty"));
                 professors.add(professor);
             }
         } catch (SQLException e) {
@@ -154,4 +170,20 @@ public class MySQLConnector implements DBHelper {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void addAccount(Account account) {
+        try {
+            String query = "INSERT INTO Account(username, hashed_password, is_admin) VALUES (?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, String.valueOf(account.getUsername()));
+            statement.setBytes(2, account.getHashedPassword());
+            statement.setBoolean(3, account.isAdmin());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }

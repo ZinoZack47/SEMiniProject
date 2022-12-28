@@ -7,7 +7,7 @@ import com.ensa.glminiprojectsp.Beans.Student;
 
 public class Factory {
     private Factory() {};
-    private static Person makePerson(String option) {
+    public static Person makePerson(String option) {
         switch (option) {
             case "s", "S", "student" -> {
                 return new Student();
@@ -16,7 +16,7 @@ public class Factory {
                 return new Professor();
             }
         }
-        return null;
+        return new Person() {};
     }
     private static Person makePerson(String option, String id, String firstName, String lastName) {
         switch (option) {

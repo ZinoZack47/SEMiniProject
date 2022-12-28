@@ -9,6 +9,9 @@ public interface DBHelper {
     ArrayList<Professor> getAllProfessors();
     Person findById(String id);
     Major findMajorById(int code);
+    Account findAccountByUserId(String userId);
+
     void updateProfessor(String id, Professor professor);
+    void addAccount(Account account);
 
 }
