@@ -29,10 +29,4 @@ public class Factory {
         }
         return null;
     }
-    public static Student makeStudent(String id, String firstName, String lastName, Major major) {
-        return new Student(id, firstName, lastName, major);
-    }
-    public static Professor makeProfessor(String id, String firstName, String lastName, String specialty) {
-        return new Professor(id, firstName, lastName, specialty);
-    }
 }

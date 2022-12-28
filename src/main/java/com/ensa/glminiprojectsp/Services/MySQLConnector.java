@@ -135,15 +135,17 @@ public class MySQLConnector implements DBHelper {
                 if (!resultSet.next())
                     return null;
 
-                String firstName = resultSet.getString("first_name");
-                String lastName = resultSet.getString("last_name");
-                Major major = findMajorById(resultSet.getInt("major_code"));
-                return Factory.makeStudent(id, firstName, lastName, major);
+                Student student = (Student)Factory.makePerson("S");
+                student.setFirstName(resultSet.getString("first_name"));
+                student.setLastName(resultSet.getString("last_name"));
+                student.setMajor(findMajorById(resultSet.getInt("major_code")));
+                return student;
             }
-            String firstName = resultSet.getString("first_name");
-            String lastName = resultSet.getString("last_name");
-            String specialty = resultSet.getString("specialty");
-            return Factory.makeProfessor(id, firstName, lastName, specialty);
+            Professor professor = (Professor)Factory.makePerson("P");
+            professor.setFirstName(resultSet.getString("first_name"));
+            professor.setLastName(resultSet.getString("last_name"));
+            professor.setSpecialty(resultSet.getString("specialty"));
+            return professor;
         } catch (SQLException e) {
             e.printStackTrace();
         }
