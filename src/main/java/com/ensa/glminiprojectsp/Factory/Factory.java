@@ -18,15 +18,4 @@ public class Factory {
         }
         return new Person() {};
     }
-    private static Person makePerson(String option, String id, String firstName, String lastName) {
-        switch (option) {
-            case "s", "S", "student" -> {
-                return new Student(id, firstName, lastName);
-            }
-            case "p", "P", "professor" -> {
-                return new Professor(id, firstName, lastName);
-            }
-        }
-        return null;
-    }
 }
