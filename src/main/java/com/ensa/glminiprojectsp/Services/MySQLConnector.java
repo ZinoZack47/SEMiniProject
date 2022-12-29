@@ -6,7 +6,6 @@ import org.springframework.core.env.Environment;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MySQLConnector implements DBHelper {
     private final Environment env;
@@ -190,7 +189,7 @@ public class MySQLConnector implements DBHelper {
 
     @Override
     public void addProfessor(Professor professor) {
-        try {;
+        try {
             String query = "INSERT INTO Professor VALUES (?, ?, ?, ?)";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, professor.getId());
@@ -206,10 +205,14 @@ public class MySQLConnector implements DBHelper {
     @Override
     public void deleteProfessorsByIds(String identifiers) {
         try {
-            System.out.println(identifiers);
-            String query = "DELETE FROM Professor WHERE id IN (?)";
+            StringBuilder sb = new StringBuilder();
+            sb.append("DELETE FROM Professor WHERE id IN (?");
+            String[] ids = identifiers.split(",");
+            sb.append(", ?".repeat(ids.length - 1)).append(")");
+            String query = sb.toString();
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, identifiers);
+            for (int i = 0; i < ids.length; i ++)
+                statement.setString(i + 1, ids[i]);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -34,9 +34,11 @@ public class ManageProfessorsController {
     @PostMapping("/Dashboard/ManageProfessors/Delete")
     public String remove(@RequestBody Map<String, List<String>>requestBody) {
         String selectedIds = String.join(",", requestBody.get("selectedIds"));
-        String api = "/api/professors/delete/" + selectedIds;
-        System.out.println(api);
-        boolean success = Boolean.TRUE.equals(APIGetSet.getObject(api, boolean.class));
+        if(!selectedIds.isEmpty())
+        {
+            String api = "/api/professors/delete/" + selectedIds;
+            APIGetSet.getObject(api, boolean.class);
+        }
         return "redirect:/Dashboard/ManageProfessors";
     }
 
