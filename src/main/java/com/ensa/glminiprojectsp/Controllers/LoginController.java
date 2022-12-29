@@ -1,7 +1,7 @@
 package com.ensa.glminiprojectsp.Controllers;
 import com.ensa.glminiprojectsp.Beans.Account;
 
-import com.ensa.glminiprojectsp.Utils.APIFetcher;
+import com.ensa.glminiprojectsp.Utils.APIGetSet;
 import com.ensa.glminiprojectsp.Utils.PasswordHash;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -30,7 +30,7 @@ public class LoginController {
                                Model model) {
         char[] password = passwordField.toCharArray();
 
-        Account account = APIFetcher.getObject("/api/accounts/"+username, Account.class);
+        Account account = APIGetSet.getObject("/api/accounts/"+username, Account.class);
         if (account == null || !PasswordHash.getInstance().verifyPassword(password, account.getHashedPassword()))
         {
             model.addAttribute("invalid", true);
@@ -39,5 +39,16 @@ public class LoginController {
         session.setAttribute("user", account);
         session.setMaxInactiveInterval(3600);
         return "redirect:/Dashboard";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/login";
+    }
+
+    public static boolean VerifySession(HttpSession session) {
+        Account account = (Account)session.getAttribute("user");
+        return account != null && account.isAdmin();
     }
 }

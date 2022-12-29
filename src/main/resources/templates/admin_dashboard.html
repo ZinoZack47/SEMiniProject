@@ -1,102 +1,72 @@
 <html lang="en">
   <head>
-    <!-- Materialize CSS -->
+    <!-- Import Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Materialize JavaScript -->
+    <!-- Import Material Icons font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import Materialize JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <style>
-      .container {
-        margin-top: 80px;
-      }
-
-      .card {
-        width: 400px;
-        height: 200px;
-      }
-
-      .card-image {
-        height: 150px;
-      }
-
-      .card-action {
-        height: 50px;
-      }
-
-      .card .btn {
-        width: 100%;
-      }
-    </style>
-    <title>Dashboard</title>
+    <title>Administrator Dashboard</title>
   </head>
   <body>
-    <nav>
-      <div class="nav-wrapper grey darken-3">
-        <a href="#" class="brand-logo center">Logo</a>
+    <nav class="grey darken-3">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">ENSA</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li>
-            <a href="#">Logout</a>
+            <a href="/logout" class="valign-wrapper">
+              <span style="margin-right: 10px;">Logout</span>
+              <i class="material-icons">exit_to_app</i>
+            </a>
           </li>
         </ul>
       </div>
     </nav>
     <div class="container">
-      <h1 class="center-align">Welcome!</h1>
+      <h1>Dashboard</h1>
       <div class="row">
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://via.placeholder.com/400x150.png?text=Manage+Professors" alt="Manage Professors">
+        <a href="/Dashboard/ManageProfessors" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
               <span class="card-title">Manage Professors</span>
             </div>
-            <div class="card-action">
-              <a href="#" class="btn waves-effect waves-light">Go</a>
-            </div>
           </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://via.placeholder.com/400x150.png?text=Manage+Majors" alt="Manage Majors">
+        </a>
+        <a href="#" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
               <span class="card-title">Manage Majors</span>
             </div>
-            <div class="card-action">
-              <a href="#" class="btn waves-effect waves-light">Go</a>
+          </div>
+        </a>
+        <a href="#" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Manage Modules and their elements</span>
             </div>
           </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://via.placeholder.com/400x150.png?text=Manage+Assessment+Methods" alt="Manage Assessment Methods">
-              <span class="card-title">Manage Assessment Methods</span>
-            </div>
-            <div class="card-action">
-              <a href="#" class="btn waves-effect waves-light">Go</a>
+        </a>
+        <a href="#" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Manage Evaluation methods</span>
             </div>
           </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://via.placeholder.com/400x150.png?text=Affect+Module+Elements+to+Professors" alt="Affect Modules">
-              <span class="card-title">Affect Module Elements to Professors</span>
-            </div>
-            <div class="card-action">
-              <a href="#" class="btn waves-effect waves-light">Go</a>
+        </a>
+        <a href="#" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Manage Module Elements</span>
             </div>
           </div>
-        </div>
-        <div class="col s12 m4">
-          <div class="card">
-            <div class="card-image">
-              <img src="https://via.placeholder.com/400x150.png?text=Manage+Accounts" alt="Manage Accounts">
-              <span class="card-title">Manage Accounts</span>
-            </div>
-            <div class="card-action">
-              <a href="#" class="btn waves-effect waves-light">Go</a>
+        </a>
+        <a href="#" class="col s12 m4">
+          <div class="card blue-grey darken-1 hoverable">
+            <div class="card-content white-text">
+              <span class="card-title">Manage User accounts</span>
             </div>
           </div>
-        </div>
+        </a>
       </div>
     </div>
   </body>

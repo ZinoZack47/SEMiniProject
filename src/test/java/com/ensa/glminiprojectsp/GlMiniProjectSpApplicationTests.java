@@ -104,4 +104,12 @@ class GlMiniProjectSpApplicationTests {
         byte[] hashedPassword = account.getHashedPassword();
         assertThat(PasswordHash.getInstance().verifyPassword(password, hashedPassword)).isEqualTo(false);
     }
+
+    @Test
+    void testDeleteProfessors() {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("W90234");
+        list.add("W90123");
+        MySQLConnector.getInstance(env).deleteProfessorsByIds(String.join(",", list));
+    }
 }

@@ -4,7 +4,6 @@ import com.ensa.glminiprojectsp.Beans.Account;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -19,6 +18,6 @@ public class DashboardController {
         else if (account.isAdmin())
             return "admin_dashboard";
 
-        return "";
+        return "professor_dashboard";
     }
 }

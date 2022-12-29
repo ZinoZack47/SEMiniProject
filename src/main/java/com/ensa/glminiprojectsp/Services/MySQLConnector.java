@@ -6,6 +6,7 @@ import org.springframework.core.env.Environment;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MySQLConnector implements DBHelper {
     private final Environment env;
@@ -15,7 +16,7 @@ public class MySQLConnector implements DBHelper {
         this.env = env;
         if(!this.connect())
             throw new RuntimeException("Connection unsuccessful!");
-    };
+    }
 
     private static MySQLConnector instance;
     public static MySQLConnector getInstance(Environment env) {
@@ -182,6 +183,34 @@ public class MySQLConnector implements DBHelper {
             statement.setBytes(2, account.getHashedPassword());
             statement.setBoolean(3, account.isAdmin());
             statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void addProfessor(Professor professor) {
+        try {;
+            String query = "INSERT INTO Professor VALUES (?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, professor.getId());
+            statement.setString(2, professor.getFirstName());
+            statement.setString(3, professor.getLastName());
+            statement.setString(4, professor.getSpecialty());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteProfessorsByIds(String identifiers) {
+        try {
+            System.out.println(identifiers);
+            String query = "DELETE FROM Professor WHERE id IN (?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, identifiers);
+            statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }

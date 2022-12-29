@@ -1,0 +1,136 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Import Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- Import Material Icons font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Import Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <Title>Manage Professors</Title>
+  </head>
+  <!-- Modal Structure -->
+  <body>
+    <nav class="grey darken-3">
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo">ENSA</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a href="/logout" class="valign-wrapper">
+              <span style="margin-right: 10px;">Logout</span>
+              <i class="material-icons">exit_to_app</i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>Identifier</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Specialty</th>
+          <th><a class="waves-effect waves-light btn red modal-trigger" href="#modal1">Remove Selected</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="professor : ${professors}">
+          <td>
+            <p>
+              <label>
+                <input type="checkbox" th:value="${professor.getId()}"/>
+                <span></span>
+              </label>
+            </p>
+          </td>
+          <td th:text="${professor.getId()}">Identifier</td>
+          <td th:text="${professor.getFirstName()}">First Name</td>
+          <td th:text="${professor.getLastName()}">Last Name</td>
+          <td th:text="${professor.getSpecialty()}">Specialty</td>
+          <td>
+            <a class="waves-effect waves-light btn blue" href="#">Modify</a>
+          </td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>
+            <label>
+              <input id="identifier" type="text" placeholder="Identifier">
+            </label>
+          </td>
+          <td>
+            <label>
+              <input id="firstName" type="text" placeholder="First Name">
+            </label>
+          </td>
+          <td>
+            <label>
+              <input id="lastName" type="text" placeholder="Last Name">
+            </label>
+          </td>
+          <td>
+            <label>
+              <input id="specialty" type="text" placeholder="Specialty">
+            </label>
+          </td>
+          <td>
+            <a id="add" class="btn-floating btn-large waves-effect waves-light green">
+              <i class="material-icons">add</i>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Are you sure you want to delete the selected professors?</h4>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat red">No</a>
+        <a id="yes" class="modal-close waves-effect waves-green btn-flat green">Yes</a>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        let elems = document.querySelectorAll('.modal');
+        M.Modal.init(elems, {});
+      });
+      document.getElementById('yes').addEventListener('click', function() {
+        const selectedCheckboxes = document.querySelectorAll('input[type=checkbox]:checked');
+        fetch('/Dashboard/ManageProfessors/Delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            selectedIds: Array.from(selectedCheckboxes).map(cb => cb.value)
+          })
+        });
+        setInterval(function() {
+          window.location.reload()
+        }, 500);
+      });
+      document.getElementById("add").addEventListener('click', function() {
+        let id = document.getElementById("identifier").value;
+        let firstName = document.getElementById("firstName").value;
+        let lastName = document.getElementById("lastName").value;
+        let specialty = document.getElementById("specialty").value;
+        fetch('/Dashboard/ManageProfessors/Add', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            id: id,
+            firstName: firstName,
+            lastName: lastName,
+            specialty: specialty
+          })
+        });
+        setInterval(function() {
+          window.location.reload()
+        }, 500);
+      });
+    </script>
+  </body>

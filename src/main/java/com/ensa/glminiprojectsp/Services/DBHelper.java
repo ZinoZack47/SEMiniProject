@@ -3,6 +3,7 @@ package com.ensa.glminiprojectsp.Services;
 import com.ensa.glminiprojectsp.Beans.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface DBHelper {
     ArrayList<Student> getAllStudents();
@@ -13,5 +14,9 @@ public interface DBHelper {
 
     void updateProfessor(String id, Professor professor);
     void addAccount(Account account);
+
+    void addProfessor(Professor professor);
+
+    void deleteProfessorsByIds(String identifiers);
 
 }
