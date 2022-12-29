@@ -136,12 +136,14 @@ public class MySQLConnector implements DBHelper {
                     return null;
 
                 Student student = (Student)Factory.makePerson("S");
+                student.setId(resultSet.getString("id"));
                 student.setFirstName(resultSet.getString("first_name"));
                 student.setLastName(resultSet.getString("last_name"));
                 student.setMajor(findMajorById(resultSet.getInt("major_code")));
                 return student;
             }
             Professor professor = (Professor)Factory.makePerson("P");
+            professor.setId(resultSet.getString("id"));
             professor.setFirstName(resultSet.getString("first_name"));
             professor.setLastName(resultSet.getString("last_name"));
             professor.setSpecialty(resultSet.getString("specialty"));
@@ -162,6 +164,7 @@ public class MySQLConnector implements DBHelper {
                     "specialty = ? " +
                     "WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
+            System.out.println(professor);
             statement.setString(1, professor.getId());
             statement.setString(2, professor.getFirstName());
             statement.setString(3, professor.getLastName());

@@ -54,9 +54,9 @@ class GlMiniProjectSpApplicationTests {
         ProfessorObserver po = new ProfessorObserver(MySQLConnector.getInstance(), professor);
         professor.attach(po);
         professor.setLastName("Watson");
+        System.out.println(professor);
         professor = (Professor)MySQLConnector.getInstance().findById(id);
         assertThat(professor.getLastName()).isEqualTo("Watson");
-        System.out.println(professor);
         po.setObserved(professor);
         professor.attach(po);
         professor.setLastName("Williams");
