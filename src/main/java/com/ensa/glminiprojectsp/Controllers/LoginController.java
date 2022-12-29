@@ -29,7 +29,6 @@ public class LoginController {
                                HttpSession session,
                                Model model) {
         char[] password = passwordField.toCharArray();
-
         Account account = APIGetSet.getObject("/api/accounts/"+username, Account.class);
         if (account == null || !PasswordHash.getInstance().verifyPassword(password, account.getHashedPassword()))
         {

@@ -30,4 +30,12 @@ public class Factory {
         return new Person() {};
     }
 
+    public static Person makeClone(Person person) {
+        try {
+            return person.makeClone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return new Person() {};
+    }
 }

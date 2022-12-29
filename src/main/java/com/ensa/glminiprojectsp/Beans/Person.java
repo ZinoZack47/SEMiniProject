@@ -40,4 +40,8 @@ public abstract class Person {
     public String toString() {
         return firstName + " " + lastName + " : " + id;
     }
+
+    public Person makeClone() throws CloneNotSupportedException {
+        return (Person) this.clone();
+    }
 }
